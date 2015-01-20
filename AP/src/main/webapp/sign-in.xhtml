@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>User sign-in</title>
+	<h:outputStylesheet library="css" name="styles.css" target="head" />
+</h:head>
+<h:body>
+	<h1 class="title" align="center"
+		style="font-family: Open Sans, Times New Roman, sans-serif;">Sign
+		in to continue to Alfama Patio</h1>
+
+	<h:form id="signInForm">
+		<div align="center">
+			<div class="signInForm">
+				<p:panelGrid columns="1" id="signGrid">
+					<p:outputLabel for="eLogin" value="Login:" />
+					<p:inputText id="eLogin" value="#{cSignin.email}" required="true"
+						requiredMessage="#{msgs.emailRequired}"
+						converterMessage="#{msgs.emailConverter}"
+						validatorMessage="#{msgs.emailRange}">
+						<f:validateRegex
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</p:inputText>
+					<p:message for="eLogin" display="text" />
+
+					<p:outputLabel for="ePassword" value="Password" />
+					<p:password id="ePassword" value="#{cSignin.password}"
+						required="true" requiredMessage="#{msgs.passwordRequired}"
+						validatorMessage="#{msgs.passwordRange1}">
+						<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})" />
+					</p:password>
+					<p:message for="ePassword" display="text" />
+				</p:panelGrid>
+
+				<p:commandButton value="Sign In" styleClass="button"
+					update="signGrid" action="#{cSignin.findUser}"
+					validateClient="true">
+					<f:ajax execute="@this" render="@none" />
+				</p:commandButton>
+			</div>
+		</div>
+	</h:form>
+</h:body>
+</html>

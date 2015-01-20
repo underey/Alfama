@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Place order</title>
+	<h:outputStylesheet library="css" name="styles.css" target="head" />
+</h:head>
+<h:body>
+
+	<h1 class="title">Place order</h1>
+	<h:form>
+		<div align="center">
+			<h:panelGrid id="ord" columns="1" styleClass="form">
+				<p:outputLabel for="coCity" value="City:"
+					styleClass="registrationForm" />
+				<p:inputText id="coCity" value="#{mlb.customer.city}"
+					required="true" requiredMessage="#{msgs.cityRequired}"
+					converterMessage="#{msgs.cityConverter}">
+					<f:validateRegex pattern="[a-zA-Z ]+" />
+				</p:inputText>
+				<p:message for="coCity" display="text" />
+
+				<p:outputLabel for="coStreet" value="Street:"
+					styleClass="registrationForm" />
+				<p:inputText id="coStreet" value="#{mlb.customer.street}"
+					required="true" requiredMessage="#{msgs.streetRequired}"
+					converterMessage="#{msgs.streetConverter}">
+					<f:validateRegex pattern="[a-zA-Z ]+" />
+				</p:inputText>
+				<p:message for="coStreet" display="text" />
+
+				<p:outputLabel for="coBuilding" value="Building:"
+					styleClass="registrationForm" />
+				<p:inputText id="coBuilding" value="#{mlb.customer.building}"
+					required="true" requiredMessage="#{msgs.buildingRequired}"
+					converterMessage="#{msgs.buildingConverter}">
+				</p:inputText>
+				<p:message for="coBuilding" display="text" />
+
+				<p:outputLabel for="coApp" value="App:"
+					styleClass="registrationForm" />
+				<p:inputText id="coApp" value="#{mlb.customer.app}" required="true"
+					converterMessage="#{msgs.appConverter}">
+				</p:inputText>
+				<p:message for="coApp" display="text" />
+
+				<p:outputLabel for="coName" value="Name:"
+					styleClass="registrationForm" />
+				<p:inputText id="coName" rendered="#{cSignin.accessLevel == 0}"
+					value="#{mlb.customer.name}" required="true"
+					requiredMessage="#{msgs.nameRequired}"
+					converterMessage="#{msgs.nameConverter}"
+					validatorMessage="#{msgs.nameRange}">
+					<f:validateRegex pattern="[a-zA-Z ]+" />
+				</p:inputText>
+				<p:inputText value="#{mlb.customer.name}" readonly="true"
+					rendered="#{cSignin.accessLevel != 0}" />
+				<p:message for="coName" display="text" />
+
+				<p:outputLabel for="coPhone" value="Phone number:"
+					styleClass="registrationForm" />
+				<p:inputMask id="coPhone" mask="(999) 999-9999"
+					value="#{mlb.customer.phone}" required="true"
+					requiredMessage="#{msgs.phoneRequired}">
+					<f:validateRegex pattern="[0-9-() ]+" />
+				</p:inputMask>
+				<p:message for="coPhone" display="text" />
+
+				<p:outputLabel for="coPayment" value="Payment information:"
+					styleClass="registrationForm" />
+				<p:inputMask id="coPayment" mask="9999 9999 9999 9999"
+					value="#{mlb.customer.payment_info}"
+					converterMessage="#{msgs.paymentConverter}">
+					<f:validateRegex pattern="[0-9 ]+" />
+				</p:inputMask>
+				<p:message for="coPayment" display="text" />
+			</h:panelGrid>
+			<p:commandButton value="Place order" update="ord"
+				action="#{mlb.submitOrder}">
+			</p:commandButton>
+		</div>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Cart</title>
+	<h:outputStylesheet library="css" name="styles.css" target="head" />
+</h:head>
+<h:body>
+	<f:view>
+		<h:form>
+			<p:outputPanel>
+				<div align="center">
+					<p:dataTable id="cartTable" var="order" value="#{mlb.cartOrder}"
+						border="1" styleClass="dishTable">
+
+						<p:column>
+							<f:facet name="header">Dish</f:facet>
+							<h:outputText value="#{order.dishName}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">Price</f:facet>
+								<h:outputText value="#{order.dishprice}">
+									<f:convertNumber type="currency" currencySymbol="$"
+										locale="en_US" />
+							</h:outputText>
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">Amount</f:facet>
+								<h:inputText styleClass="column3" value="#{order.dishAmount}">
+									<!-- 	<f:ajax render="priceRender" event="keyup" /> -->
+								</h:inputText>
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">Remove</f:facet>
+								<p:commandButton icon="ui-icon-minus" title="remove"
+									actionListener="#{mlb.removeOne(order)}" update="cartTable" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">Add</f:facet>
+								<p:commandButton icon="ui-icon-plus" title="add"
+									actionListener="#{mlb.addOne(order)}" update="cartTable" />
+						</p:column>
+
+						<f:facet name="footer">Total amount:
+					<h:outputText value="#{mlb.totalAmount}">
+								<f:convertNumber type="currency" currencySymbol="$"
+									locale="en_US" />
+							</h:outputText>
+						</f:facet>
+					</p:dataTable>
+				</div>
+			</p:outputPanel>
+
+			<div align="right">
+				<p:commandButton value="Place order" action="#{mlb.placeOrder(cSignin.accessLevel)}"
+					styleClass="cartButton"></p:commandButton>
+			</div>
+
+		</h:form>
+	</f:view>
+</h:body>
+</html>

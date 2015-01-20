@@ -1,0 +1,10 @@
+insert into STAFF(name, surname, login, password, email, role_id, access_id, isactivated)
+values('John', 'Smith', 'Joe', 'Qwerty1', 'j.smith@gmail.com', 3, 5, 1);
+
+  
+  
+  insert into STAFF(name, surname, login, password, email, role_id, access_id, isactivated)
+values('Joe', 'Smith', 'Joe', '$2a$10$ZKTj0uzh0PYS.Nx/WMFo8u2aJ/1EhMNDSbJeNw9cGkHVuzIBzrWpe', 'joe.smith@gmail.com', 3, 5, 1);
+
+delete from Staff
+where name = 'John';

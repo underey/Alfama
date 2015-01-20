@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<title>Staff list</title>
+	<h:outputStylesheet library="css" name="styles.css" target="head" />
+</h:head>
+<h:body>
+	<h:form>
+		<div align="center">
+
+			<p:tabView dynamic="true" cache="true" id="adminpanel">
+				<p:tab title="find By surname" id="tab1">
+					<h:panelGrid columns="1" cellpadding="10">
+						<p:outputLabel id="surname" value="Enter a surname" />
+						<p:inputText value="#{wsg.sur}">
+							<p:ajax event="blur" update="findBySurname"
+								listener="#{wsg.generateStaffListBySurname}" />
+						</p:inputText>
+
+						<p:outputPanel id="findBySurname">
+							<div align="center">
+								<p:dataTable var="staff" value="#{wsg.staffs}" border="1"
+									styleClass="dishTable">
+
+									<f:facet name="caption">Staff</f:facet>
+
+									<p:column>
+										<f:facet name="header">id</f:facet>
+										<p:outputLabel value="#{staff.id}" />
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Name</f:facet>
+										<p:inplace editor="true">
+											<p:inputText value="#{staff.name}" />
+										</p:inplace>
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Surname</f:facet>
+										<p:inplace editor="true">
+											<p:inputText value="#{staff.surname}" />
+										</p:inplace>
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Login</f:facet>
+										<p:inplace editor="true">
+											<p:inputText value="#{staff.login}" />
+										</p:inplace>
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Email</f:facet>
+										<p:outputLabel value="#{staff.email}" />
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Activate</f:facet>
+										<p:inplace editor="true">
+											<p:selectBooleanCheckbox value="#{staff.isactivated}" />
+										</p:inplace>
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Access Level</f:facet>
+										<p:inplace editor="true">
+											<p:selectOneMenu id="wsgAccesslevel"
+												value="#{staff.accesslevel.access_desc}">
+												<f:selectItem itemLabel="Kitchen" itemValue="Kitchen" />
+												<f:selectItem itemLabel="Delivery" itemValue="Delivery" />
+												<f:selectItem itemLabel="Restaurant Administrator"
+													itemValue="RestaurantAdmin" />
+												<f:selectItem itemLabel="Business Analyst"
+													itemValue="BusinessAnalyst" />
+												<f:selectItem itemLabel="Web Security Guard"
+													itemValue="SecurityGuard" />
+											</p:selectOneMenu>
+										</p:inplace>
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Edit</f:facet>
+										<p:commandButton icon="ui-icon-check" title="edit"
+											actionListener="#{wsg.editStaff(staff)}" />
+									</p:column>
+								</p:dataTable>
+							</div>
+						</p:outputPanel>
+					</h:panelGrid>
+				</p:tab>
+				<p:tab title="find By role">
+					<h:panelGrid columns="1" cellpadding="10">
+						<p:outputLabel id="role" value="Chouse a role" />
+						<p:selectOneMenu value="#{wsg.accesslevel}">
+							<f:selectItem itemLabel="Kitchen" itemValue="200" />
+							<f:selectItem itemLabel="Delivery" itemValue="300" />
+							<f:selectItem itemLabel="Restaurant Administrator"
+								itemValue="400" />
+							<f:selectItem itemLabel="Business Analyst" itemValue="500" />
+							<f:selectItem itemLabel="Web Security Guard" itemValue="1000" />
+							<p:ajax update="findByRole" event="valueChange"
+								listener="#{wsg.generateStaffListByRole()}" />
+						</p:selectOneMenu>
+
+						<p:outputPanel id="findByRole">
+							<div align="center">
+								<p:dataTable var="staff" value="#{wsg.staffs}" border="1"
+									styleClass="dishTable">
+
+									<f:facet name="caption">Staff</f:facet>
+
+									<p:column>
+										<f:facet name="header">Name</f:facet>
+										<p:inplace editor="true">
+											<p:inputText value="#{staff.name}" />
+										</p:inplace>
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Surname</f:facet>
+										<p:inplace editor="true">
+											<p:inputText value="#{staff.surname}" />
+										</p:inplace>
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Login</f:facet>
+										<p:inplace editor="true">
+											<p:inputText value="#{staff.login}" />
+										</p:inplace>
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Email</f:facet>
+										<p:outputLabel value="#{staff.email}" />
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Activate</f:facet>
+										<p:inplace editor="true">
+											<p:selectBooleanCheckbox value="#{staff.isactivated}" />
+										</p:inplace>
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Access Level</f:facet>
+										<p:inplace editor="true">
+											<p:selectOneMenu id="wsgAccesslevel"
+												value="#{staff.accesslevel.access_desc}">
+												<f:selectItem itemLabel="Kitchen" itemValue="Kitchen" />
+												<f:selectItem itemLabel="Delivery" itemValue="Delivery" />
+												<f:selectItem itemLabel="Restaurant Administrator"
+													itemValue="RestaurantAdmin" />
+												<f:selectItem itemLabel="Business Analyst"
+													itemValue="BusinessAnalyst" />
+												<f:selectItem itemLabel="Web Security Guard"
+													itemValue="SecurityGuard" />
+											</p:selectOneMenu>
+										</p:inplace>
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Edit</f:facet>
+										<p:commandButton icon="ui-icon-check" title="edit"
+											actionListener="#{wsg.editStaff(staff)}" />
+									</p:column>
+								</p:dataTable>
+							</div>
+						</p:outputPanel>
+					</h:panelGrid>
+				</p:tab>
+				<p:tab title="change Staff pass">
+					<h:panelGrid columns="1" cellpadding="10" id="passChange">
+						<p:outputLabel for="wsgEmail" id="change" value="Enter an email" />
+						<p:inputText id="wsgEmail" value="#{wsg.existingEmail}"
+							required="true" requiredMessage="#{msgs.emailRequired}"
+							converterMessage="#{msgs.emailConverter}"
+							validatorMessage="#{msgs.emailRange}">
+							<p:ajax event="blur" update="availableWsgEmail" />
+							<f:validateLength minimum="6" />
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+						<p:outputLabel value="#{wsg.availableMail}" id="availableWsgEmail" />
+						<p:message for="wsgEmail" display="text" />
+
+						<p:outputLabel for="wsgPassword" value="Enter a password"
+							styleClass="registrationForm" />
+						<p:password id="wsgPassword" match="wsgPasswordAgain"
+							value="#{wsg.password}" required="true" feedback="true"
+							requiredMessage="#{msgs.passwordRequired}"
+							validatorMessage="#{msgs.passwordRange1}">
+							<f:validateRegex
+								pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})" />
+						</p:password>
+						<p:message for="wsgPassword" display="text" />
+
+						<p:outputLabel for="wsgPasswordAgain" value="Confirm password" />
+						<p:password id="wsgPasswordAgain" value="#{wsg.password}"
+							required="true" requiredMessage="#{msgs.passwordRequired}"
+							validatorMessage="#{msgs.passwordRange2}">
+							<f:validateRegex
+								pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})" />
+						</p:password>
+						<p:message for="wsgPasswordAgain" display="text" />
+					</h:panelGrid>
+					<p:commandButton styleClass="button" value="Submit"
+						actionListener="#{wsg.submitChange}" update="g" />
+					<p:growl id="g" showDetail="true" sticky="false" life="3000" />
+				</p:tab>
+				<p:tab title="order participants">
+					<h:panelGrid columns="1" cellpadding="10">
+						<p:outputLabel id="orderid" value="Enter an order number" />
+						<p:inputText value="#{wsg.orderId}">
+							<p:ajax event="blur" update="part"
+								listener="#{wsg.showOrderDetail}" />
+						</p:inputText>
+						<p:outputPanel id="part">
+							<div align="center">
+								<p:dataTable var="participant" value="#{wsg.participants}"
+									border="1" styleClass="dishTable">
+
+									<f:facet name="caption">Info</f:facet>
+
+									<p:column>
+										<f:facet name="header">Order number</f:facet>
+										<p:outputLabel value="#{wsg.orderId}" />
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Customer</f:facet>
+										<p:outputLabel value="#{participant.customer.email}" />
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Staff member surname</f:facet>
+										<p:outputLabel value="#{participant.staff.surname}" />
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Staff id</f:facet>
+										<p:outputLabel value="#{participant.staff.id}" />
+									</p:column>
+								</p:dataTable>
+							</div>
+						</p:outputPanel>
+					</h:panelGrid>
+				</p:tab>
+			</p:tabView>
+		</div>
+	</h:form>
+</h:body>
+</html>

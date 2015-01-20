@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet library="css" name="styles.css" target="head" />
+</h:head>
+<h:body>
+	<h:form>
+		<div class="header">
+			<div class="inlineMenu">
+				<div align="center">
+					<h1>
+						<a href="homePage.xhtml"><img src="images/logo.jpg"
+							alt="Alfama Patio" height="300px" width="300px" /></a>
+					</h1>
+					<div class="menulist">
+
+
+
+						<div align="right">
+
+							<p:tabMenu activeIndex="#{param.i}" >
+							
+							<p:menuitem value="Cart" action="#{mlb.calculateCart}">
+								<f:param name="i" value="0" />
+							</p:menuitem>
+							<p:menuitem value="Sign In" outcome="sign-inPage">
+								<f:param name="i" value="1" />
+							</p:menuitem>
+							<p:menuitem value="Registration" outcome="customer-registrationPage">
+								<f:param name="i" value="2" />
+							</p:menuitem>
+							
+							</p:tabMenu>
+
+						</div>
+
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</h:form>
+</h:body>
+</html>

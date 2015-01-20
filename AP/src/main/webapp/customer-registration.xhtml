@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Customer registration</title>
+	<h:outputStylesheet library="css" name="styles.css" target="head" />
+</h:head>
+<h:body>
+
+	<h1 class="title">Registration form</h1>
+	<h:form >
+		<div align="center">
+			<p:panelGrid id="grid" columns="1" styleClass="form">
+				<p:outputLabel for="cName" value="Name:"
+					styleClass="registrationForm" />
+				<p:inputText id="cName" value="#{creg.name}" required="true"
+					requiredMessage="#{msgs.nameRequired}"
+					converterMessage="#{msgs.nameConverter}"
+					validatorMessage="#{msgs.nameRange}">
+					<f:validateLength minimum="2" maximum="15" />
+					<f:validateRegex pattern="[a-zA-Z ]+" />
+				</p:inputText>
+				<p:message for="cName" display="text" />
+
+				<p:outputLabel for="cSurname" value="Surname:"
+					styleClass="registrationForm" />
+				<p:inputText id="cSurname" value="#{creg.surname}" required="true"
+					requiredMessage="#{msgs.surnameRequired}"
+					converterMessage="#{msgs.surnameConverter}"
+					validatorMessage="#{msgs.surnameRange}">
+					<f:validateLength minimum="2" maximum="15" />
+					<f:validateRegex pattern="[a-zA-Z]+" />
+				</p:inputText>
+				<p:message for="cSurname" display="text" />
+
+				<p:outputLabel for="cBirthday" value="Birthday:"
+					styleClass="registrationForm" />
+				<p:inputMask id="cBirthday" mask="99.99.9999"
+					value="#{creg.birthday}" required="true"
+					requiredMessage="#{msgs.birthdayRequired}"
+					converterMessage="#{msgs.birthdayConverter}">
+					<f:convertDateTime pattern="dd.MM.yyyy" />
+				</p:inputMask>
+				<p:message for="cBirthday" display="text" />
+
+				<p:outputLabel for="cCity" value="City:"
+					styleClass="registrationForm" />
+				<p:inputText id="cCity" value="#{creg.city}" required="true"
+					requiredMessage="#{msgs.cityRequired}"
+					converterMessage="#{msgs.cityConverter}">
+					<f:validateLength minimum="3" maximum="15" />
+					<f:validateRegex pattern="[a-zA-Z ]+" />
+				</p:inputText>
+				<p:message for="cCity" display="text" />
+
+				<p:outputLabel for="cStreet" value="Street:"
+					styleClass="registrationForm" />
+				<p:inputText id="cStreet" value="#{creg.street}" required="true"
+					converterMessage="#{msgs.streetConverter}">
+					<f:validateRegex pattern="(([a-zA-Z ]).{3,20})" />
+				</p:inputText>
+				<p:message for="cStreet" display="text" />
+
+				<p:outputLabel for="cBuilding" value="Building:"
+					styleClass="registrationForm" />
+				<p:inputText id="cBuilding" value="#{creg.building}" required="true"
+					converterMessage="#{msgs.buildingConverter}">
+					<f:validateRegex pattern="(([a-zA-Z0-9]).{1,5})" />
+				</p:inputText>
+				<p:message for="cBuilding" display="text" />
+
+				<p:outputLabel for="cApp" value="App:" styleClass="registrationForm" />
+				<p:inputText id="cApp" value="#{creg.app}" required="true"
+					converterMessage="#{msgs.appConverter}">
+					<f:validateRegex pattern="(([a-zA-Z0-9/]).{1,5})" />
+				</p:inputText>
+				<p:message for="cApp" display="text" />
+
+				<p:outputLabel for="cPayment" value="Payment information:"
+					styleClass="registrationForm" />
+				<p:inputMask id="cPayment" mask="9999 9999 9999 9999" required="true"
+					value="#{creg.payment}" converterMessage="#{msgs.paymentConverter}">
+					<f:validateRegex pattern="[0-9 ]+" />
+				</p:inputMask>
+				<p:message for="cPayment" display="text" />
+
+				<p:outputLabel for="cPhone" value="Phone number:"
+					styleClass="registrationForm" />
+				<p:inputMask id="cPhone" mask="(999) 999-9999" value="#{creg.phone}"
+					required="true" requiredMessage="#{msgs.phoneRequired}">
+					<f:validateRegex pattern="[0-9-() ]+" />
+				</p:inputMask>
+				<p:message for="cPhone" display="text" />
+
+				<p:outputLabel for="cEmail" value="Email:"
+					styleClass="registrationForm" />
+				<p:inputText id="cEmail" value="#{creg.email}" required="true"
+					requiredMessage="#{msgs.emailRequired}"
+					converterMessage="#{msgs.emailConverter}"
+					validatorMessage="#{msgs.emailRange}">
+					<p:ajax event="blur" update="availableE" />
+					<f:validateLength minimum="6" />
+					<f:validateRegex
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+				<p:outputLabel value="#{creg.availableMail}" id="availableE" />
+				<p:message for="cEmail" display="text" />
+
+				<p:outputLabel for="cLogin" value="Login:"
+					styleClass="registrationForm" />
+				<p:inputText id="cLogin" value="#{creg.login}" required="true"
+					requiredMessage="#{msgs.loginRequired}"
+					converterMessage="#{msgs.loginConverter}"
+					validatorMessage="#{msgs.loginRange}">
+					<f:validateRegex pattern="(([a-zA-Z0-9_.-]).{4,12})" />
+				</p:inputText>
+				<p:message for="cLogin" display="text" />
+
+				<p:outputLabel for="cPassword" value="Create a password"
+					styleClass="registrationForm" />
+				<p:password id="cPassword" match="cPasswordAgain"
+					value="#{creg.password}" required="true" feedback="true"
+					requiredMessage="#{msgs.passwordRequired}"
+					validatorMessage="#{msgs.passwordRange1}">
+					<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})" />
+				</p:password>
+				<p:message for="cPassword" display="text" />
+
+				<p:outputLabel for="cPasswordAgain" value="Confirm your password" />
+				<p:password id="cPasswordAgain" value="#{creg.password}"
+					required="true" requiredMessage="#{msgs.passwordRequired}"
+					validatorMessage="#{msgs.passwordRange2}">
+					<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})" />
+				</p:password>
+				<p:message for="cPasswordAgain" display="text" />
+			</p:panelGrid>
+			<p:commandButton styleClass="button" value="Submit"
+				action="#{creg.submit}" update="grid" validateClient="true" ></p:commandButton>
+		</div>
+	</h:form>
+</h:body>
+</html>

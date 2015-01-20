@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Alfama Patio Home</title>
+	<h:outputStylesheet library="css" name="styles.css" target="head" />
+</h:head>
+<h:body>
+
+	<h:form>
+		<div class="homecotent">
+
+			<h:commandLink action="#{mlb.generateMenuList}" styleClass="block1">
+				<h:graphicImage value="images/_fish.png" alt="seafood" width="960"
+					height="220" />
+				<span class="price"> <span>Seafood</span> <strong></strong>
+				</span>
+				<f:param name="menuItemId" value="8" />
+				<f:setPropertyActionListener target="#{mlb.menuItemId}" value="8" />
+				<!-- <f:ajax event="click" render="seafood"/> -->
+			</h:commandLink>
+			<h:commandLink action="#{mlb.generateMenuList}" styleClass="block1">
+				<h:graphicImage value="images/_salad.png" alt="salad" width="960"
+					height="220" />
+				<span class="price"> <span>Salads</span> <strong></strong>
+				</span>
+				<f:param name="menuItemId" value="7" />
+				<f:setPropertyActionListener target="#{mlb.menuItemId}" value="7" />
+			</h:commandLink>
+			<h:commandLink action="#{mlb.generateMenuList}" styleClass="block1">
+				<h:graphicImage value="images/_entree.png" alt="entree" width="960"
+					height="220" />
+				<span class="price"> <span>Entrees</span> <strong></strong>
+				</span>
+				<f:param name="menuItemId" value="6" />
+				<f:setPropertyActionListener target="#{mlb.menuItemId}" value="6" />
+			</h:commandLink>
+			<h:commandLink action="#{mlb.generateMenuList}" styleClass="block1">
+				<h:graphicImage value="images/_sidedishes.png" alt="sidedish"
+					width="960" height="220" />
+				<span class="price"> <span>Side dishes</span> <strong></strong>
+				</span>
+				<f:param name="menuItemId" value="9" />
+				<f:setPropertyActionListener target="#{mlb.menuItemId}" value="9" />
+			</h:commandLink>
+			<h:commandLink action="#{mlb.generateMenuList}" styleClass="block1">
+				<h:graphicImage value="images/_BBQ.png" alt="BBQ" width="960"
+					height="220" />
+				<span class="price"> <span>BBQ</span> <strong></strong>
+				</span>
+				<f:param name="menuItemId" value="3" />
+				<f:setPropertyActionListener target="#{mlb.menuItemId}" value="3" />
+			</h:commandLink>
+			<h:commandLink action="#{mlb.generateMenuList}" styleClass="block1">
+				<h:graphicImage value="images/_sauce.png" alt="sauce" width="960"
+					height="220" />
+				<span class="price"> <span>Sauces</span> <strong></strong>
+				</span>
+				<f:param name="menuItemId" value="1" />
+				<f:setPropertyActionListener target="#{mlb.menuItemId}" value="1" />
+			</h:commandLink>
+			<h:commandLink action="#{mlb.generateMenuList}" styleClass="block1">
+				<h:graphicImage value="images/_additionally1.png" alt="additionally"
+					width="960" height="220" />
+				<span class="price"> <span>Additionally</span> <strong></strong>
+				</span>
+				<f:param name="menuItemId" value="2" />
+				<f:setPropertyActionListener target="#{mlb.menuItemId}" value="2" />
+			</h:commandLink>
+			<h:commandLink action="#{mlb.generateMenuList}" styleClass="block1">
+				<h:graphicImage value="images/_dessert.png" alt="dessert"
+					width="960" height="220" />
+				<span class="price"> <span>Desserts</span> <strong></strong>
+				</span>
+				<f:param name="menuItemId" value="5" />
+				<f:setPropertyActionListener target="#{mlb.menuItemId}" value="5" />
+			</h:commandLink>
+			<h:commandLink action="#{mlb.generateMenuList}" styleClass="block1">
+				<h:graphicImage value="images/_wine.png" alt="wine" width="960"
+					height="220" />
+				<span class="price"> <span>Beverages</span> <strong></strong>
+				</span>
+				<f:param name="menuItemId" value="4" />
+				<f:setPropertyActionListener target="#{mlb.menuItemId}" value="4" />
+			</h:commandLink>
+
+			<p:separator styleClass="separator" />
+
+			<div class="container_12">
+				<div class="grid_12">
+					<h3 align="center" style="margin-bottom: 100px; margin-top: 20px;">Try
+						it</h3>
+				</div>
+
+				<div class="grid_3">
+					<div class="box maxheight">
+						<img src="images/box_img1.jpg" alt="Seafood" />
+						<div class="title">Seafood</div>
+						<p:outputLabel value="#{mlb.getDishInfo(8)}" />
+						<br />
+						<h:commandLink styleClass="toMenu"
+							action="#{mlb.generateMenuList}">
+							Menu
+							<f:setPropertyActionListener target="#{mlb.menuItemId}" value="8" />
+						</h:commandLink>
+					</div>
+				</div>
+
+				<div class="grid_3">
+					<div class="box maxheight">
+						<img src="images/box_img2.jpg" alt="Beverages" />
+						<div class="title">Beverages</div>
+						<p:outputLabel value="#{mlb.getDishInfo(4)}" />
+						<br />
+						<h:commandLink styleClass="toMenu" action="#{mlb.generateMenuList}">Menu
+						<f:setPropertyActionListener target="#{mlb.menuItemId}" value="4" />
+						</h:commandLink>
+					</div>
+				</div>
+
+				<div class="grid_3">
+					<div class="box maxheight">
+						<img src="images/box_img3.jpg" alt="Additionally" />
+						<div class="title">Additionally</div>
+						<p:outputLabel value="#{mlb.getDishInfo(2)}" />
+						<br />
+						<h:commandLink  styleClass="toMenu" action="#{mlb.generateMenuList}">Menu
+						<f:setPropertyActionListener target="#{mlb.menuItemId}" value="2" />
+						</h:commandLink>
+					</div>
+				</div>
+
+				<div class="grid_3">
+					<div class="box maxheight">
+						<img src="images/box_img4.jpg" alt="Sauces" />
+						<div class="title">Sauces</div>
+						<p:outputLabel value="#{mlb.getDishInfo(1)}" />
+						<br />
+						<h:commandLink styleClass="toMenu" action="#{mlb.generateMenuList}">Menu
+						<f:setPropertyActionListener target="#{mlb.menuItemId}" value="1" />
+						</h:commandLink>
+					</div>
+				</div>
+				<div class="text_line"></div>
+
+			</div>
+		</div>
+	</h:form>
+</h:body>
+</html>

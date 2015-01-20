@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet library="css" name="styles.css" target="head" />
+</h:head>
+<h:body>
+	<h:form>
+		<div class="header">
+			<div class="inlineMenu">
+				<div align="center">
+					<h1>
+						<a href="homePage.xhtml"><img src="images/logo.png"
+							alt="Alfama Patio" height="300px" width="300px" class="logo" /></a>
+					</h1>
+					<div class="menulist">
+						<div align="right">
+							<p:commandButton id="dynaButton" value="Menu" type="button"
+								icon="ui-icon-extlink" />
+							<p:menu overlay="true" trigger="dynaButton" my="left top"
+								at="left bottom">
+
+								<!-- action link -->
+							 	<p:menuitem value="Cart" action="#{mlb.calculateCart()}"
+									rendered="#{cSignin.accessLevel == 0 || cSignin.accessLevel == 100}" />
+							 	<p:menuitem value="#{cSignin.displayIcon()}"
+									action="#{cSignin.out()}"
+									rendered="#{cSignin.accessLevel != 0}" ajax="false" />
+
+
+								<!-- Navigation -->
+								<p:menuitem value="#{cSignin.displayIcon()}"
+									outcome="sign-inPage" rendered="#{cSignin.accessLevel == 0}" />
+								<p:menuitem value="Registration"
+									outcome="customer-registrationPage"
+									rendered="#{cSignin.accessLevel == 0}" />
+								<p:menuitem value="Add dish" outcome="addDishRestAdmPage"
+									rendered="#{cSignin.accessLevel == 400}" />
+								<p:menuitem value="Create staff" outcome="addStaffPage"
+									rendered="#{cSignin.accessLevel == 1000}" />
+								<p:menuitem value="Show Staff" outcome="staffListPage"
+									rendered="#{cSignin.accessLevel == 1000}" />
+
+							</p:menu>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</h:form>
+</h:body>
+</html>

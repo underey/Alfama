@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Add dish</title>
+	<h:outputStylesheet library="css" name="styles.css" target="head" />
+</h:head>
+<h:body>
+
+	<h1 class="title">Add dish info</h1>
+	<h:form enctype="multipart/form-data">
+		<div align="center">
+			<p:panelGrid id="raDish" columns="1" styleClass="addDish">
+				<p:outputLabel for="raName" value="Name:" styleClass="addDishForm" />
+				<p:inputText id="raName" value="#{rab.dish.name}" required="true"
+					requiredMessage="#{msgs.nameRequired}"
+					converterMessage="#{msgs.nameConverter}"
+					validatorMessage="#{msgs.nameRange}">
+					<f:validateLength minimum="2" maximum="30" />
+					<f:validateRegex pattern="[a-zA-Z ]+" />
+				</p:inputText>
+				<p:message for="raName" display="text" />
+
+				<p:outputLabel for="raWeight" value="Weight:"
+					styleClass="addDishForm" />
+				<p:inputMask id="raWeight" value="#{rab.dish.weight}" mask="9.999"
+					required="true" requiredMessage="#{msgs.weightRequired}"
+					validatorMessage="#{msgs.weightRange}">
+					<f:validateDoubleRange minimum="0.005" maximum="9.999" />
+				</p:inputMask>
+				<p:message for="raWeight" display="text" />
+
+				<p:outputLabel for="raPrice" value="Price:" styleClass="addDishForm" />
+				<p:inputMask id="raPrice" value="#{rab.dish.price}" required="true"
+					requiredMessage="#{msgs.priceRequired}"
+					converterMessage="#{msgs.priceConverter}" 
+					validatorMessage="#{msgs.priceRange}" >					
+					<f:convertNumber type="currency" currencySymbol="$" locale="en_US" />
+					<f:validateDoubleRange minimum="0.50" maximum="10000.00" />
+				</p:inputMask>
+				<p:message for="raPrice" display="text" />
+
+				<p:outputLabel for="raDescription" value="Description:"
+					styleClass="addDishForm" />
+				<p:inputTextarea id="raDescription" value="#{rab.dish.description}"
+					rows="10" cols="50" required="true"
+					requiredMessage="#{msgs.descriptionRequired}"
+					validatorMessage="#{msgs.descriptionRange}">
+					<f:validateLength maximum="200" />
+				</p:inputTextarea>
+				<p:message for="raDescription" display="text" />
+
+				<p:outputLabel for="raMenusection" value="Menusection:"
+					styleClass="addDishForm" />
+				<p:selectOneMenu id="raMenusection" value="#{rab.menusectionId}">
+					<f:selectItem itemLabel="Seafood" itemValue="8" />
+					<f:selectItem itemLabel="Salads" itemValue="7" />
+					<f:selectItem itemLabel="Entrees" itemValue="6" />
+					<f:selectItem itemLabel="Side dishes" itemValue="9" />
+					<f:selectItem itemLabel="BBQ" itemValue="3" />
+					<f:selectItem itemLabel="Sauces" itemValue="1" />
+					<f:selectItem itemLabel="Additionally" itemValue="2" />
+					<f:selectItem itemLabel="Desserts" itemValue="5" />
+					<f:selectItem itemLabel="Beverages" itemValue="4" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Activated:" styleClass="addDishForm" />
+				<p:selectBooleanCheckbox id="raActivated"
+					value="#{rab.dish.isactivated}" />
+
+				<p:outputLabel value="Kitchen made:" styleClass="addDishForm" />
+				<p:selectBooleanCheckbox id="raKitchenMade"
+					value="#{rab.dish.is_kitchen_made}" />
+
+			<!-- 	<p:outputLabel value="Upload cover: " />
+				<p:fileUpload
+					fileUploadListener="#{rab.handleFileUpload}"
+					mode="advanced" update="messages"
+					label="Choose a file" sizeLimit="10485760"
+					allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+					invalidSizeMessage="The maximum file size allowed is 10 Megabytes !"
+					invalidFileMessage="You are allowed to upload only images !" />
+				<p:growl id="messages" showDetail="true" life="5000" />
+ -->
+			</p:panelGrid>
+			<p:commandButton id="coverSubmit" styleClass="addDishButton"
+				value="Add" action="#{rab.insert}" update="raDish">
+				<!-- <f:ajax execute="@all" render="@form" /> -->
+			</p:commandButton>
+		</div>
+	</h:form>
+</h:body>
+</html>

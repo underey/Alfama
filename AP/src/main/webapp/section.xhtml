@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<title>Alfama Patio Seafood</title>
+	<h:outputStylesheet library="css" name="styles.css" target="head" />
+</h:head>
+<h:body>
+	<h:form>
+		<p:outputPanel>
+			<div align="center">
+				<p:dataTable var="dish" value="#{mlb.dishes}" border="1"
+					styleClass="dishTable">
+
+					<f:facet name="caption">food</f:facet>
+
+					<p:column>
+						<f:facet name="header">Name</f:facet>
+						<p:inplace editor="true" rendered="#{cSignin.accessLevel == 400}">
+							<p:inputText value="#{dish.name}" />
+						</p:inplace>
+						<h:outputText value="#{dish.name}"
+							rendered="#{cSignin.accessLevel != 400}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Weight</f:facet>
+						<p:inplace editor="true" rendered="#{cSignin.accessLevel == 400}">
+							<p:inputText value="#{dish.weight}" />
+						</p:inplace>
+						<h:outputText value="#{dish.weight}"
+							rendered="#{cSignin.accessLevel != 400}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Price</f:facet>
+						<p:inplace editor="true" rendered="#{cSignin.accessLevel == 400}">
+							<p:inputText value="#{dish.price}">
+								<f:convertNumber type="currency" currencySymbol="$"
+									locale="en_US" />
+							</p:inputText>
+						</p:inplace>
+						<h:outputText value="#{dish.price}"
+							rendered="#{cSignin.accessLevel != 400}">
+							<f:convertNumber type="currency" currencySymbol="$"
+								locale="en_US" />
+						</h:outputText>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Description</f:facet>
+						<p:inplace editor="true" rendered="#{cSignin.accessLevel == 400}">
+							<p:inputText value="#{dish.description}" />
+						</p:inplace>
+						<h:outputText value="#{dish.description}"
+							rendered="#{cSignin.accessLevel != 400}" />
+					</p:column>
+
+					<p:column rendered="#{cSignin.accessLevel != 400}">
+						<f:facet name="header">Add to cart</f:facet>
+						<p:commandButton icon="ui-icon-plus" title="add"
+							actionListener="#{mlb.addToCart(dish)}" />
+					</p:column>
+
+					<p:column rendered="#{cSignin.accessLevel == 400}">
+						<f:facet name="header">Activate</f:facet>
+						<p:inplace editor="true">
+							<p:selectBooleanCheckbox value="#{dish.isactivated}" />
+						</p:inplace>
+					</p:column>
+
+					<p:column rendered="#{cSignin.accessLevel == 400}">
+						<f:facet name="header">Edit</f:facet>
+						<p:commandButton icon="ui-icon-check" title="edit"
+							actionListener="#{rab.editDish(dish)}" />
+					</p:column>
+
+				</p:dataTable>
+			</div>
+		</p:outputPanel>
+	</h:form>
+</h:body>
+</html>

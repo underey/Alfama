@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	
+	<title>Alfama Patio Seafood</title>
+	<h:outputStylesheet library="css" name="styles.css" target="head" />
+</h:head>
+<h:body>
+<h:form id="sectionForm">
+	<p:outputPanel id="section">
+		<p:dataTable id="seafoodTable" var="dish" value="#{mlb.dishes}"
+			border="1" styleClass="dishTable">
+
+			<f:facet name="caption">Seafood</f:facet>
+
+			<p:column>
+				<f:facet name="header">Name</f:facet>
+				<h:outputText value="#{dish.name}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">Weight</f:facet>
+				<h:outputText value="#{dish.weight}" />
+				<!-- 	<f:ajax render="priceRender" event="keyup" /> -->
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">Price</f:facet>
+				<h:outputText value="#{dish.price}">
+					<f:convertNumber type="currency" currencySymbol="$" locale="en_US" />
+				</h:outputText>
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">Description</f:facet>
+				<h:outputText value="#{dish.description}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">Add to cart</f:facet>
+				<p:commandButton icon="ui-icon-plus" title="add" actionListener="#{mlb.addToCart(dish)}" />
+			</p:column>
+			
+			<!-- 	<f:facet name="footer">Total amount:<h:outputText
+					value="#{cartBean.totalAmount}">
+					<f:convertNumber type="currency" currencySymbol="$" locale="en_US" />
+				</h:outputText></f:facet>
+		 -->
+
+		</p:dataTable>
+	</p:outputPanel>
+</h:form>
+</h:body>
+</html>

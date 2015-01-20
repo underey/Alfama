@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Member registration</title>
+	<link href="registration.css" rel="stylesheet" type="text/css" />
+</h:head>
+<h:body>
+	<h1 class="title" align="center"
+		style="font-family: Open Sans, Times New Roman, sans-serif;">Sign
+		in to continue to Alfama Patio</h1>
+
+	<h:form>
+		<div class="signinform" align="center">
+
+
+			<p:panelGrid columns="3" styleClass="depoTable" id="registrationGrid">
+
+				<p:outputLabel for="eLogin" value="Login:" />
+				<p:inputText id="eLogin" value="#{cSignin.login}" required="true"
+					requiredMessage="#{msgs.loginRequired}">
+				</p:inputText>
+				<p:message for="eLogin" display="text" />
+				<p:outputLabel for="ePassword" value="Password" />
+				<p:password id="ePassword" value="#{cSignin.password}"
+					required="true" requiredMessage="#{msgs.passwordRequired}">
+				</p:password>
+				<p:message for="ePassword" display="text" />
+
+			</p:panelGrid>
+
+			<p:commandButton value="Sign In" styleClass="signinbutton"
+				action="custhome" update="registrationGrid">
+			</p:commandButton>
+		</div>
+	</h:form>
+
+</h:body>
+</html>

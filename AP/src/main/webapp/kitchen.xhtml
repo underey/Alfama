@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Order queue</title>
+	<h:outputStylesheet library="css" name="styles.css" target="head" />
+</h:head>
+<h:body>
+	<f:view>
+		<h:form id="kitchenScreen">
+		<p:poll interval="5" listener="#{kb.updateKitchenScreen}" update="kitchenScreen"/>
+			<p:outputPanel>
+				<div align="center">
+					<p:dataTable id="oneorder" var="order" value="#{kb.queue}"
+						border="1" styleClass="dishTable">
+						<p:column>
+							<f:facet name="header">Time</f:facet>
+							<h:outputText value="#{order.displayTime}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">Dish</f:facet>
+							<h:outputText value="#{order.name}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">Done</f:facet>
+							<p:commandButton icon="ui-icon-plus" title="done"
+								action="#{kb.done(order, cSignin.staff.id)}" />
+						</p:column>
+					</p:dataTable>
+				</div>
+			</p:outputPanel>
+		</h:form>
+	</f:view>
+</h:body>
+</html>

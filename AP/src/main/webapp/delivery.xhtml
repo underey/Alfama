@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Order queue</title>
+	<h:outputStylesheet library="css" name="styles.css" target="head" />
+</h:head>
+<h:body>
+	<f:view>
+		<h:form id="deliveryScreen">
+			<p:poll interval="5"
+				listener="#{deb.updateDeliveryScreen(deb.option)}"
+				update="deliveryScreen" />
+			<p:outputPanel>
+				<p:selectOneButton value="#{deb.option}">
+					<f:selectItem itemLabel="by Time" itemValue="1" />
+					<f:selectItem itemLabel="by Status" itemValue="2" />
+				</p:selectOneButton>
+				<div align="center">
+					<p:dataTable id="deorder" var="order" value="#{deb.queue}"
+						border="1" styleClass="dishTable">
+						<p:column>
+							<f:facet name="header">Time</f:facet>
+							<h:outputText value="#{order.displayTime}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">Status</f:facet>
+							<h:outputText value="#{order.status}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">Order id</f:facet>
+							<h:outputText value="#{order.orderId}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">Price</f:facet>
+							<h:outputText value="#{order.price}">
+								<f:convertNumber type="currency" currencySymbol="$"
+									locale="en_US" />
+							</h:outputText>
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">Address</f:facet>
+							<h:outputText value="#{order.displayAddress}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">Take order</f:facet>
+							<p:commandButton icon="ui-icon-plus" title="takeOrder"
+								disabled="#{deb.dis(order)}"
+								action="#{deb.take(order, cSignin.staff.id)}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">Done</f:facet>
+							<p:commandButton icon="ui-icon-plus" title="done"
+								disabled="#{deb.check(order)}"
+								action="#{deb.done(order, cSignin.staff.id)}" />
+						</p:column>
+					</p:dataTable>
+				</div>
+			</p:outputPanel>
+		</h:form>
+	</f:view>
+</h:body>
+</html>

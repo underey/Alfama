@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Create staff</title>
+	<h:outputStylesheet library="css" name="styles.css" target="head" />
+</h:head>
+<h:body>
+
+	<h1 class="title">Add member</h1>
+	<div class="staffForm" align="center">
+		<h:form>
+			<h:panelGrid id="wsgStaff" columns="1" styleClass="registrationForm">
+				<p:outputLabel for="wsgName" value="Name:" styleClass="addDishForm" />
+				<p:inputText id="wsgName" value="#{wsg.name}" required="true"
+					requiredMessage="#{msgs.nameRequired}"
+					converterMessage="#{msgs.nameConverter}"
+					validatorMessage="#{msgs.nameRange}">
+					<f:validateLength minimum="2" maximum="30" />
+					<f:validateRegex pattern="[a-zA-Z ]+" />
+				</p:inputText>
+				<p:message for="wsgName" display="text" />
+
+				<p:outputLabel for="wsgSurname" value="Surname:"
+					styleClass="registrationForm" />
+				<p:inputText id="wsgSurname" value="#{wsg.surname}"
+					required="true" requiredMessage="#{msgs.surnameRequired}"
+					converterMessage="#{msgs.surnameConverter}"
+					validatorMessage="#{msgs.surnameRange}">
+					<f:validateLength minimum="2" maximum="30" />
+					<f:validateRegex pattern="[a-zA-Z ]+" />
+				</p:inputText>
+				<p:message for="wsgSurname" display="text" />
+
+				<p:outputLabel for="wsgLogin" value="Login:"
+					styleClass="registrationForm" />
+				<p:inputText id="wsgLogin" value="#{wsg.login}"
+					required="true" requiredMessage="#{msgs.loginRequired}"
+					converterMessage="#{msgs.loginConverter}"
+					validatorMessage="#{msgs.loginRange}">
+					<f:validateRegex pattern="(([a-zA-Z0-9_.-]).{5,12})" />
+				</p:inputText>
+				<p:message for="wsgLogin" display="text" />
+
+				<p:outputLabel for="wsgEmail" value="Email:"
+					styleClass="registrationForm" />
+				<p:inputText id="wsgEmail" value="#{wsg.email}" required="true"
+					requiredMessage="#{msgs.emailRequired}"
+					converterMessage="#{msgs.emailConverter}"
+					validatorMessage="#{msgs.emailRange}">
+					<p:ajax event="blur" update="availableWsgE" />
+					<f:validateLength minimum="6" />
+					<f:validateRegex
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+				<p:outputLabel value="#{wsg.availableMail}" id="availableWsgE" />
+				<p:message for="wsgEmail" display="text" />
+
+				<p:outputLabel for="wsgPassword" value="Create a password"
+					styleClass="registrationForm" />
+				<p:password id="wsgPassword" match="wsgPasswordAgain"
+					value="#{wsg.password}" required="true" feedback="true"
+					requiredMessage="#{msgs.passwordRequired}"
+					validatorMessage="#{msgs.passwordRange1}">
+					<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})" />
+				</p:password>
+				<p:message for="wsgPassword" display="text" />
+
+				<p:outputLabel for="wsgPasswordAgain" value="Confirm your password"
+					styleClass="registrationForm" />
+				<p:password id="wsgPasswordAgain" value="#{wsg.password}"
+					required="true" requiredMessage="#{msgs.passwordRequired}"
+					validatorMessage="#{msgs.passwordRange2}">
+					<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})" />
+				</p:password>
+				<p:message for="wsgPasswordAgain" display="text" />  
+
+				<p:outputLabel for="wsgAccesslevel" value="Level of access:"
+					styleClass="registrationForm" />
+				<p:selectOneMenu id="wsgAccesslevel" value="#{wsg.accesslevel}">
+					<f:selectItem itemLabel="Kitchen" itemValue="200" />
+					<f:selectItem itemLabel="Delivery" itemValue="300" />
+					<f:selectItem itemLabel="Restaurant Administrator" itemValue="400" />
+					<f:selectItem itemLabel="Business Analyst" itemValue="500" />
+					<f:selectItem itemLabel="Web Security Guard" itemValue="1000" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Activated:" styleClass="registrationForm" />
+				<p:selectBooleanCheckbox id="wsgActivated"
+					value="#{wsg.isactivated}" />
+			</h:panelGrid>
+			<p:commandButton value="Create" action="#{wsg.create}" 
+				update="wsgStaff" />
+
+		</h:form>
+	</div>
+</h:body>
+</html>

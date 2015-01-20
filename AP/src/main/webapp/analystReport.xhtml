@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<title>Analyst Reports</title>
+	<h:outputStylesheet library="css" name="styles.css" target="head" />
+</h:head>
+<h:body>
+	<h:form>
+		<div align="center">
+			<p:tabView dynamic="true" cache="true" id="reportpanel">
+				<p:tab title="total report" id="tab1">
+					<h:panelGrid columns="1" cellpadding="10">
+						<p:outputLabel for="from1" value="Enter data from" />
+						<p:calendar id="from1" value="#{ab.from}">
+							<p:ajax event="blur" />
+						</p:calendar>
+						<p:outputLabel for="until1" value="Enter data until" />
+						<p:calendar id="until1" value="#{ab.until}"
+							maxdate="#{ab.maxDate}">
+							<p:ajax event="blur" />
+						</p:calendar>
+
+						<p:outputPanel id="totalReport">
+							<div align="center">
+								<h:outputLabel value="Nubmer of orders: " />
+								<h:outputLabel value="#{ab.ptr.orderCount}" />
+								<br />
+								<h:outputLabel value="Total sum: " />
+								<h:outputLabel value="#{ab.ptr.sumOmi}" />
+							</div>
+						</p:outputPanel>
+					</h:panelGrid>
+					<h:commandButton value="Submit"
+						action="#{ab.updateAnalystScreen(1)}" update="totalReport" />
+				</p:tab>
+				<p:tab title="daily category report" id="tab2">
+					<h:panelGrid columns="1" cellpadding="10">
+						<p:outputLabel for="from2" value="Enter data from" />
+						<p:calendar id="from2" value="#{ab.from}">
+							<p:ajax event="blur" />
+						</p:calendar>
+						<p:outputLabel for="until2" value="Enter data until" />
+						<p:calendar id="until2" value="#{ab.until}"
+							maxdate="#{ab.maxDate}">
+							<p:ajax event="blur" />
+						</p:calendar>
+						<p:outputLabel for="section" value="Menu section:" />
+						<p:selectOneMenu id="section" value="#{ab.category}">
+							<f:selectItem itemLabel="Sauces" itemValue="1" />
+							<f:selectItem itemLabel="Additionally" itemValue="2" />
+							<f:selectItem itemLabel="BBQ" itemValue="3" />
+							<f:selectItem itemLabel="Beverages" itemValue="4" />
+							<f:selectItem itemLabel="Dessert" itemValue="5" />
+							<f:selectItem itemLabel="Entrees" itemValue="6" />
+							<f:selectItem itemLabel="Salads" itemValue="7" />
+							<f:selectItem itemLabel="Seafood" itemValue="8" />
+							<f:selectItem itemLabel="Side dishes" itemValue="9" />
+						</p:selectOneMenu>
+
+						<p:outputPanel id="dailyCategoryReport">
+							<div align="center">
+								<h:outputLabel value="Nubmer of orders: " />
+								<h:outputLabel value="#{ab.ptr.orderCount}" />
+								<br />
+								<h:outputLabel value="Total sum: " />
+								<h:outputLabel value="#{ab.ptr.sumOmi}" />
+							</div>
+						</p:outputPanel>
+					</h:panelGrid>
+					<h:commandButton value="Submit"
+						action="#{ab.updateAnalystScreen(2)}" update="dailyCategoryReport" />
+				</p:tab>
+			</p:tabView>
+		</div>
+	</h:form>
+</h:body>
+</html>
